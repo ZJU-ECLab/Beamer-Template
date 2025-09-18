@@ -72,35 +72,38 @@ def generate_markdown_content(categories, year, month, chief_editors):
         "![](https://emotionculturelab.com/wp-content/uploads/2024/09/e59bbee789874.png)"
     )
     md_lines.append("")
-    md_lines.append("---")
-    md_lines.append("")
+    md_lines.append(
+        "> 《东西情报》是**浙江大学情绪和文化实验室**所创办的、收集当月情绪心理学领域文章和最新科研进展的文献汇编。"
+    )
+    md_lines.append(
+        "> 每一期《东西情报》把不同文章划分为了情绪、文化、面孔、声音等多个关键词，并将文章总结梳理成简短的概要，旨在让读者用短时间了解当前情绪领域的最新成果和动向。"
+    )
+    md_lines.append(
+        "> 通过系统而高效的知识整合，《东西情报》致力于搭建连接前沿科研与公众科普的桥梁，期待能为屏幕前的你带来帮助！"
+    )
+    md_lines.append("> **《东西情报》完整版请点击下方链接获取。**")
     md_lines.append("[阅读完整版]()")
+    md_lines.append("---")
     md_lines.append("")
 
     # 2. Article Sections
     for i, category in enumerate(categories.keys()):
         articles = categories[category]
+        md_lines.append("")
         md_lines.append(f"## 关键词：{category}")
         md_lines.append("")
 
         for j, article in enumerate(articles):
-            if j > 0:
-                md_lines.append(">")
-
-            md_lines.append(f"> ### {article.get('title', 'No Title')}")
-            md_lines.append(">")
-            md_lines.append(f"> **{article.get('authors', 'No Authors')}**")
-            md_lines.append(">")
-            md_lines.append(f"> *{article.get('journal', 'No Journal')}*")
-            md_lines.append(">")
+            md_lines.append(f"### {article.get('title', 'No Title')}")
+            md_lines.append(f"**{article.get('authors', 'No Authors')}**")
+            md_lines.append(f"*{article.get('journal', 'No Journal')}*")
 
             summary = article.get("summary", "No Summary").replace("\n", "\n> ")
-            md_lines.append(f"> {summary}")
+            md_lines.append(f"{summary}")
+            md_lines.append("")
 
         if i < len(categories) - 1:
-            md_lines.append("")
             md_lines.append("---")
-            md_lines.append("")
 
     # 3. Footer
     md_lines.append("")
